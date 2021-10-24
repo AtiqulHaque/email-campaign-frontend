@@ -1,4 +1,4 @@
-import { DataGrid } from "@material-ui/data-grid";
+import MaterialTable from "material-table";
 import React from "react";
 import { connect } from "react-redux";
 import { campaign } from "../_actions";
@@ -35,12 +35,8 @@ class CampaignContacts extends React.Component {
   render() {
     return (
       <div style={{ height: 800, width: "100%" }}>
-        <DataGrid
-          rows={this.props.contacts}
-          columns={columns}
-          pageSize={100}
-          rowsPerPageOptions={[2, 5, 7]}
-        />
+        
+    <MaterialTable title="Employee Details" data={this.props.contacts} columns={columns} />
       </div>
     );
   }

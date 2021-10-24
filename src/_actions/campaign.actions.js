@@ -5,7 +5,7 @@ export const campaign = {
   getCampaignContacts,
 };
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "http://65.0.86.72:3000";
 
 const getCampaignListSuccess = (lists) => ({
   type: CampaignConstants.CAMPAIGN_LIST_SUCCESS,
