@@ -25,7 +25,7 @@ class CampaignSummary extends React.Component {
     });
 
     return (
-      <div className="row">{this.props.loading ? <Loading /> : container}</div>
+      <div className="row">{this.props.loading ? <Loading /> : (container)}</div>
     );
   }
 }

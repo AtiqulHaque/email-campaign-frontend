@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment from 'moment';
 import React from "react";
 import DateTimePicker from "react-datetime-picker";
 import { connect } from "react-redux";
@@ -11,18 +11,21 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+let defaultStates = {
+  campaigns_name: "",
+  email_subject: "",
+  email_body: "",
+  schedule_time: new Date(),
+  personalize_text: "",
+  attachments: {},
+  is_schedule: 0,
+};
+
+
 class CampaignForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      campaigns_name: "",
-      email_subject: "",
-      email_body: "",
-      schedule_time: new Date(),
-      personalize_text: "",
-      attachments: {},
-      is_schedule: 0,
-    };
+    this.state = defaultStates;
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
@@ -75,7 +78,7 @@ class CampaignForm extends React.Component {
     this.props.createCampaign(
       formData,
       function () {
-        this.setState({});
+        this.setState(defaultStates);
       }.bind(this)
     );
 
@@ -112,6 +115,7 @@ class CampaignForm extends React.Component {
               <input
                 name="campaigns_name"
                 type="text"
+                value={this.state.campaigns_name}
                 className="form-control"
                 onChange={this.handleInputChanged}
                 aria-describedby="emailHelp"
@@ -127,6 +131,7 @@ class CampaignForm extends React.Component {
               </label>
               <input
                 type="text"
+                value={this.state.email_subject}
                 name="email_subject"
                 className="form-control"
                 onChange={this.handleInputChanged}
@@ -139,11 +144,12 @@ class CampaignForm extends React.Component {
                 Email Body
               </label>
               <textarea
+               value={this.state.email_body}
                 name="email_body"
                 onChange={this.handleInputChanged}
                 className="form-control"
                 id="exampleFormControlTextarea1"
-                rows="3"
+                rows="10"
               ></textarea>
               <ErrorComponent errors={this.props.errors} name="body" />
             </div>
@@ -188,8 +194,6 @@ class CampaignForm extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
-
   const { campaigns, loading, buttonText, errors } = state.campaign;
   return {
     loading,

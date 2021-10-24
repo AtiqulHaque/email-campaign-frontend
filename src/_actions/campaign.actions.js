@@ -1,4 +1,5 @@
 import { CampaignConstants } from "../_constants";
+
 export const campaign = {
   loadDashboard,
   createCampaign,
@@ -16,11 +17,6 @@ const getCampaignListSuccess = (lists) => ({
 const getCampaignContactList = (lists) => ({
   type: CampaignConstants.CAMPAIGN_CONTACT_LIST_SUCCESS,
   payload: lists,
-});
-
-const setMessageText = (msg) => ({
-  type: CampaignConstants.BUTTON_MESSAGE_SET,
-  payload: { message: msg },
 });
 
 const campaignLoading = (msg) => ({
@@ -72,12 +68,6 @@ function getCampaignContacts(id) {
   };
 }
 
-function setMessage(msg) {
-  return (dispatch) => {
-    dispatch(setMessageText(msg));
-  };
-}
-
 function createCampaign(params, callback) {
   const requestOptions = {
     method: "POST",
@@ -94,10 +84,13 @@ function createCampaign(params, callback) {
         if (data.status === "validation-error") {
           dispatch(setButtonText("Oppps Submit again..."));
           dispatch(setValidationError(data.payload));
+
           if (!response.ok) {
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
           }
+          // If validation error occured then no need 
+          // to reamove already submited value
         }
 
         dispatch(setButtonText("Submit"));
