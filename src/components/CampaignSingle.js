@@ -7,12 +7,16 @@ export default class CampaignSingle extends React.Component {
 
   render() {
     let status = "";
+    let class_prefix = "";
     if (this.props.data.status === 0) {
       status = "Going To Process";
+      class_prefix = "card border-left-danger shadow h-100 py-2";
     } else if (this.props.data.status === 1) {
       status = "Processing";
+      class_prefix = "card border-left-warning shadow h-100 py-2";
     } else {
       status = "Finished";
+      class_prefix = "card border-left-success shadow h-100 py-2";
     }
     return (
       <a
@@ -21,11 +25,11 @@ export default class CampaignSingle extends React.Component {
         style={{ textDecoration: "none" }}
         className="col-xl-3 col-md-6 mb-4 linkable"
       >
-        <div className="card border-left-primary shadow h-100 py-2">
+        <div className={class_prefix}>
           <div className="card-body">
             <div className="row no-gutters align-items-center">
               <div className="col mr-2">
-                <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                <div className="text-xs font-weight-bold text-primary text-uppercase mb-1 campaign_status">
                   {status}
                 </div>
                 <div className="h5 mb-0 font-weight-bold text-gray-800">

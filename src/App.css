@@ -9,3 +9,7 @@
 .linkable {
   cursor: pointer;
 }
+.campaign_status {
+  font-size: 1.7rem;
+  color: #0f2b7a !important;
+}

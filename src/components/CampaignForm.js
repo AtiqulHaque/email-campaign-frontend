@@ -1,9 +1,10 @@
-import moment from 'moment';
 import React from "react";
 import DateTimePicker from "react-datetime-picker";
+import toast, { Toaster } from 'react-hot-toast';
 import { connect } from "react-redux";
 import { ErrorComponent } from "../components/ErrorComponent";
 import { campaign } from "../_actions";
+let moment = require("moment");
 function mapDispatchToProps(dispatch) {
   return {
     createCampaign: (data, callback) =>
@@ -59,7 +60,7 @@ class CampaignForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData();
-
+   
     formData.append("campaigns_name", this.state.campaigns_name);
     formData.append("is_schedule", this.state.is_schedule);
     formData.append("body", this.state.email_body);
@@ -88,8 +89,10 @@ class CampaignForm extends React.Component {
   changeHandler(event) {
     this.setState({ attachments: event.target.files });
   }
+  
 
   render() {
+   
     let DatePicker = () => {
       if (this.state.is_schedule) {
         return (
@@ -187,6 +190,7 @@ class CampaignForm extends React.Component {
               {this.props.buttonText}
             </button>
           </form>
+          <Toaster />
         </div>
       </div>
     );

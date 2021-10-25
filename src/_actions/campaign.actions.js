@@ -1,4 +1,6 @@
+import toast from 'react-hot-toast';
 import { CampaignConstants } from "../_constants";
+
 
 export const campaign = {
   loadDashboard,
@@ -76,13 +78,14 @@ function createCampaign(params, callback) {
 
   return (dispatch) => {
     dispatch(setButtonText("Please wait & Processing...."));
-
+    
     fetch(BASE_URL + "/campaign/add", requestOptions).then((response) => {
       return response.text().then((text) => {
         const data = JSON.parse(text);
 
         if (data.status === "validation-error") {
-          dispatch(setButtonText("Oppps Submit again..."));
+          toast.error('Please check all the fields creafully.');
+          dispatch(setButtonText("Submit again"));
           dispatch(setValidationError(data.payload));
 
           if (!response.ok) {
@@ -95,7 +98,7 @@ function createCampaign(params, callback) {
 
         dispatch(setButtonText("Submit"));
         dispatch(campaignSubmitSuccess());
-
+        toast.success('Campaign successfully created!');
         callback();
       });
     });
