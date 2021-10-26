@@ -33,7 +33,7 @@ export default class CampaignSingle extends React.Component {
                   {status}
                 </div>
                 <div className="h5 mb-0 font-weight-bold text-gray-800">
-                  {this.props.data.campaigns_name} (
+                  {this.props.data.campaigns_name.substring(0, 20)}... (
                   {this.props.data.total_contacts})
                 </div>
               </div>
